@@ -24,3 +24,8 @@ jobs:
 
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/build
+
+      - name: Build project
+        working-directory: ${{runner.workspace}}/build
+        shell: bash
+        run: cmake --build . --config Release --target VDSProject_test
