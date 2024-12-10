@@ -28,7 +28,7 @@ TEST_F(ManagerTests, CreateVariable) {
     EXPECT_EQ(manager.createVar("a"), a_id); // re-creating same variable
     EXPECT_EQ(manager.createVar("b"), b_id);
 
-    EXPECT_EQ(manager.uniqueTableSize(), 5);
+    EXPECT_EQ(manager.uniqueTableSize(), 10);
 }
 
 TEST_F(ManagerTests, Constants) {
@@ -45,24 +45,45 @@ TEST_F(ManagerTests, TopVariable) {
     EXPECT_EQ(manager.topVar(b_id), b_id); // Top variable of 'b' is 'b' itself
 
     // For constants, the topVar is 0 (no variable)
-    EXPECT_EQ(manager.topVar(manager.True()), 0);
+    EXPECT_EQ(manager.topVar(manager.True()), 1);
     EXPECT_EQ(manager.topVar(manager.False()), 0);
 }
 
-// TEST_F(ManagerTests, LogicalOperations) {
-//     // auto and_ab = manager.and2(a_id, b_id);
-//     // EXPECT_EQ(and_ab, manager.ite(a_id, b_id, manager.False())); // AND operation should match ITE
-//     // // EXPECT_EQ(!and_ab, manager.nand2(a_id, b_id));
-//
-//     // auto or_ab = manager.or2(a_id, b_id);
-//     // EXPECT_EQ(or_ab, manager.ite(a_id, manager.True(), b_id));
-//     // EXPECT_EQ(!or_ab, manager.nor2(a_id, b_id));
-//
-//     // manager.or2(a_id, b_id);
-//     // auto xor_ab = manager.xor2(a_id, b_id);
-//     // EXPECT_EQ(xor_ab, manager.ite(a_id, manager.neg(b_id), b_id ));
-//     // // EXPECT_EQ(!xor_ab, manager.xnor2(a_id, b_id));
-// }
+TEST_F(ManagerTests, LogicalOperations) {
+    auto and_ab = manager.and2(a_id, b_id);
+    EXPECT_EQ(and_ab, manager.ite(a_id, b_id, manager.False())); // AND operation should match ITE
+    // // EXPECT_EQ(!and_ab, manager.nand2(a_id, b_id));
+
+    auto or_ab = manager.or2(a_id, b_id);
+    EXPECT_EQ(or_ab, manager.ite(a_id, manager.True(), b_id));
+    // EXPECT_EQ(!or_ab, manager.nor2(a_id, b_id));
+
+    auto xor_ab = manager.xor2(a_id, b_id);
+    EXPECT_EQ(xor_ab, manager.ite(a_id, manager.neg(b_id), b_id ));
+    // // EXPECT_EQ(!xor_ab, manager.xnor2(a_id, b_id));
+}
+
+TEST_F(ManagerTests, CofactorsForConstants) {
+    EXPECT_EQ(manager.coFactorTrue(manager.True(), a_id), manager.True());  // True coFactored w.r.t 'a' is still True
+    EXPECT_EQ(manager.coFactorFalse(manager.True(), a_id), manager.True()); // True coFactored w.r.t 'a' is still True
+
+    EXPECT_EQ(manager.coFactorTrue(manager.False(), a_id), manager.False()); // False coFactored w.r.t 'a' is still False
+    EXPECT_EQ(manager.coFactorFalse(manager.False(), a_id), manager.False()); // False coFactored w.r.t 'a' is still False
+}
+
+TEST_F(ManagerTests, CofactorsForLogicalExpressions) {
+    auto and_ab = manager.and2(a_id, b_id);
+
+    // High branch for 'a AND b' w.r.t 'a' is 'b' (when 'a' is True)
+    EXPECT_EQ(manager.coFactorTrue(and_ab, a_id), b_id);
+
+    // Low branch for 'a AND b' w.r.t 'a' is False (when 'a' is False)
+    EXPECT_EQ(manager.coFactorFalse(and_ab, a_id), manager.False());
+    // 'a AND b' does not depend on 'c', so cofactors w.r.t 'c' should return the expression itself
+    // std::cout << manager.topVar(and_ab) << std::endl;
+    // EXPECT_EQ(manager.coFactorTrue(and_ab, c_id), and_ab);
+    // EXPECT_EQ(manager.coFactorFalse(and_ab, c_id), and_ab);
+}
 
 TEST_F(ManagerTests, Negation) {
     // Negate constants

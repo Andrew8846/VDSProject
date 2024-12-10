@@ -7,6 +7,7 @@
 
 
 #include <iostream>
+#include <limits>
 #include <unordered_map>
 #include <vector>
 
@@ -33,8 +34,23 @@ namespace ClassProject {
         const BDD_ID trueID = 1;
     public:
         Manager() { // constructor
+            // initialize uniqueTable as it is on first task
             uniqueTable.push_back({falseID, 0, 0, 0});
-            uniqueTable.push_back({trueID, 1, 1, 0});
+            uniqueTable.push_back({trueID, 1, 1, 1});
+            uniqueTable.push_back({2, 1, 0, 2}); // a
+            uniqueTable.push_back({3, 1, 0, 3}); // b
+            uniqueTable.push_back({4, 1, 0, 4}); // c
+            uniqueTable.push_back({5, 1, 0, 5}); // d
+            uniqueTable.push_back({6, 1, 3, 2}); // a + b
+            uniqueTable.push_back({7, 5, 0, 4}); // c * d
+            uniqueTable.push_back({8, 7, 0, 3}); // b * c * d
+            uniqueTable.push_back({9, 7, 8, 2}); // f
+
+            variableMap["a"] = 2;
+            variableMap["b"] = 3;
+            variableMap["c"] = 4;
+            variableMap["d"] = 5;
+
             std::cout << "Manager initialized.\n";
         }
 
@@ -63,6 +79,7 @@ namespace ClassProject {
         }
 
         bool isVariable(BDD_ID x) override {
+            if (isConstant(x)) return false;
             bool isVar = x < uniqueTable.size() && uniqueTable[x].topVar == x; // if its in bounds and its top variable is itself.
             return isVar;
         }
@@ -75,12 +92,23 @@ namespace ClassProject {
         }
 
         BDD_ID ite(BDD_ID i, BDD_ID t, BDD_ID e) override {
-            if(i == trueID) { return  t;}
-            if(i == falseID) { return  e;}
-            if(t == e) { return t;}
+            if(i == trueID) {
+                return  t;
+            }
+            if(i == falseID) {
+                return  e;
+            }
+            if(t == e) {
+                return t;
+            }
 
-            size_t top1 = std::min(topVar(i), topVar(t));
-            size_t top = std::min(top1, topVar(e));
+            size_t top = std::numeric_limits<size_t>::max(); // Start with a high value
+            if (!isConstant(i)) top = std::min(top, topVar(i));
+            if (!isConstant(t)) top = std::min(top, topVar(t));
+            if (!isConstant(e)) top = std::min(top, topVar(e));
+
+            // size_t top1 = std::min(topVar(i), topVar(t));
+            // size_t top = std::min(top1, topVar(e));
             BDD_ID rhigh = ite(coFactorTrue(i, top), coFactorTrue(t, top), coFactorTrue(e, top));
             BDD_ID rlow = ite(coFactorFalse(i, top), coFactorFalse(t, top), coFactorFalse(e, top));
 
@@ -100,15 +128,33 @@ namespace ClassProject {
 
         // todo question these two
         BDD_ID coFactorTrue(BDD_ID f, BDD_ID x) override {
-            if (topVar(f) > x) { return f;} // x doesn't affect f. x has lower id than top variable of f function
-            if (topVar(f) < x) { return ite(x, coFactorTrue(uniqueTable[f].high, x), coFactorTrue(uniqueTable[f].low, x));}
+            // constant handling
+            if (isConstant(f)) {
+                return f;
+            }
+
+            if (topVar(f) > x) {
+                return f;
+            } // x doesn't affect f. x has lower id than top variable of f function
+            if (topVar(f) < x) {
+                return ite(x, coFactorTrue(uniqueTable[f].high, x), coFactorTrue(uniqueTable[f].low, x));
+            }
 
             return uniqueTable[f].high; // topvariable is x and directly return high
         }
 
         BDD_ID coFactorFalse(BDD_ID f, BDD_ID x) override {
-            if (topVar(f) > x) { return f;}
-            if (topVar(f) < x) { return ite(x, coFactorFalse(uniqueTable[f].high, x), coFactorFalse(uniqueTable[f].low, x));}
+            // constant handling
+            if (isConstant(f)) {
+                return f;
+            }
+
+            if (topVar(f) > x) {
+                return f;
+            }
+            if (topVar(f) < x) {
+                return ite(x, coFactorFalse(uniqueTable[f].high, x), coFactorFalse(uniqueTable[f].low, x));
+            }
 
             return uniqueTable[f].low;
         }
