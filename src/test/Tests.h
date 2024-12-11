@@ -80,9 +80,6 @@ TEST_F(ManagerTests, CofactorsForLogicalExpressions) {
     // Low branch for 'a AND b' w.r.t 'a' is False (when 'a' is False)
     EXPECT_EQ(manager.coFactorFalse(and_ab, a_id), manager.False());
     // 'a AND b' does not depend on 'c', so cofactors w.r.t 'c' should return the expression itself
-    // std::cout << manager.topVar(and_ab) << std::endl;
-    // EXPECT_EQ(manager.coFactorTrue(and_ab, c_id), and_ab);
-    // EXPECT_EQ(manager.coFactorFalse(and_ab, c_id), and_ab);
 }
 
 TEST_F(ManagerTests, Negation) {
@@ -113,6 +110,57 @@ TEST_F(ManagerTests, FindVars) {
     // 'a' is the only variable
     EXPECT_EQ(vars.size(), 1);
     EXPECT_TRUE(vars.find(a_id) != vars.end()); // 'a' should be in the set
+}
+
+TEST_F(ManagerTests, ITEFunction) {
+    // Case: i == True
+    EXPECT_EQ(manager.ite(manager.True(), a_id, b_id), a_id);
+
+    // Case: i == False
+    EXPECT_EQ(manager.ite(manager.False(), a_id, b_id), b_id);
+
+    // Case: t == e
+    EXPECT_EQ(manager.ite(a_id, b_id, b_id), b_id);
+
+    // General case
+    auto result = manager.ite(a_id, b_id, c_id);
+    EXPECT_NE(result, a_id);
+    EXPECT_NE(result, b_id);
+    EXPECT_NE(result, c_id);
+}
+
+TEST_F(ManagerTests, IsVariable) {
+    EXPECT_TRUE(manager.isVariable(a_id)); // Variable
+
+    EXPECT_FALSE(manager.isVariable(manager.True())); // True is not a variable
+    EXPECT_FALSE(manager.isVariable(manager.False())); // False is not a variable
+
+    auto and_ab = manager.and2(a_id, b_id);
+    EXPECT_FALSE(manager.isVariable(and_ab)); // Logical operation result is not a variable
+}
+
+TEST_F(ManagerTests, LogicalNegation) {
+    EXPECT_EQ(manager.nand2(a_id, b_id), manager.neg(manager.and2(a_id, b_id)));
+    EXPECT_EQ(manager.nor2(a_id, b_id), manager.neg(manager.or2(a_id, b_id)));
+    EXPECT_EQ(manager.xnor2(a_id, b_id), manager.neg(manager.xor2(a_id, b_id)));
+}
+
+TEST_F(ManagerTests, TopVarInvalidID) {
+    EXPECT_THROW(manager.topVar(999), std::out_of_range); // Non-existent ID
+}
+
+TEST_F(ManagerTests, UniqueTableSize) {
+    EXPECT_EQ(manager.uniqueTableSize(), 10); // Initial size
+    manager.createVar("new_var");
+    EXPECT_EQ(manager.uniqueTableSize(), 11); // After adding a new variable
+}
+
+TEST_F(ManagerTests, CofactorsOneInputTest) {
+    EXPECT_EQ(manager.coFactorTrue(a_id), manager.True());
+    EXPECT_EQ(manager.coFactorFalse(a_id), manager.False());
+    auto or_ab = manager.or2(a_id, b_id);
+    EXPECT_EQ(manager.coFactorTrue(or_ab), manager.True());
+    EXPECT_EQ(manager.coFactorFalse(or_ab), b_id);
 }
 
 #endif

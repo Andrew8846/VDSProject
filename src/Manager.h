@@ -6,10 +6,13 @@
 #define VDSPROJECT_MANAGER_H
 
 
+#include <fstream>
 #include <iostream>
 #include <limits>
+#include <queue>
 #include <unordered_map>
 #include <vector>
+#include <filesystem>
 
 #include "ManagerInterface.h"
 
