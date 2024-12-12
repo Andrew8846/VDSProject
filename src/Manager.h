@@ -5,7 +5,6 @@
 #ifndef VDSPROJECT_MANAGER_H
 #define VDSPROJECT_MANAGER_H
 
-
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -13,8 +12,10 @@
 #include <unordered_map>
 #include <vector>
 #include <filesystem>
-
+#include <vector>
+#include <string>
 #include "ManagerInterface.h"
+
 
 namespace ClassProject {
     using std::vector;
@@ -30,34 +31,27 @@ namespace ClassProject {
     };
 
     class Manager : public ManagerInterface {
-    private:
-        vector<BDDNode> uniqueTable;
-        unordered_map<string, size_t> variableMap;
-        const BDD_ID falseID = 0;
-        const BDD_ID trueID = 1;
-    public:
-        Manager() { // constructor
-            // initialize uniqueTable as it is on first task
-            uniqueTable.push_back({falseID, 0, 0, 0});
-            uniqueTable.push_back({trueID, 1, 1, 1});
-            uniqueTable.push_back({2, 1, 0, 2}); // a
-            uniqueTable.push_back({3, 1, 0, 3}); // b
-            uniqueTable.push_back({4, 1, 0, 4}); // c
-            uniqueTable.push_back({5, 1, 0, 5}); // d
-            uniqueTable.push_back({6, 1, 3, 2}); // a + b
-            uniqueTable.push_back({7, 5, 0, 4}); // c * d
-            uniqueTable.push_back({8, 7, 0, 3}); // b * c * d
-            uniqueTable.push_back({9, 7, 8, 2}); // f
+private:
+    vector<BDDNode> uniqueTable;
+    unordered_map<string, size_t> variableMap;
+    const BDD_ID falseID = 0;
+    const BDD_ID trueID = 1;
+public:
+    Manager() { // constructor
+        // initialize uniqueTable as it is on first task
+        uniqueTable.push_back({falseID, 0, 0, 0});
+        uniqueTable.push_back({trueID, 1, 1, 1});
 
-            variableMap["a"] = 2;
-            variableMap["b"] = 3;
-            variableMap["c"] = 4;
-            variableMap["d"] = 5;
+        variableMap["False"] = 0;
+        variableMap["True"] = 1;
+        // variableMap["a"] = 2;
+        // variableMap["b"] = 3;
+        // variableMap["c"] = 4;
+        // variableMap["d"] = 5;
 
-            std::cout << "Manager initialized.\n";
-        }
-
-        BDD_ID createVar(const std::string &label) override {
+        std::cout << "Manager initialized.\n";
+    }
+BDD_ID createVar(const std::string &label) override {
             if(variableMap.find(label)!=variableMap.end()) {
                 return variableMap[label];
             }
@@ -140,7 +134,7 @@ namespace ClassProject {
                 return f;
             } // x doesn't affect f. x has lower id than top variable of f function
             if (topVar(f) < x) {
-                return ite(x, coFactorTrue(uniqueTable[f].high, x), coFactorTrue(uniqueTable[f].low, x));
+                return ite(topVar(f), coFactorTrue(uniqueTable[f].high, x), coFactorTrue(uniqueTable[f].low, x));
             }
 
             return uniqueTable[f].high; // topvariable is x and directly return high
@@ -156,7 +150,7 @@ namespace ClassProject {
                 return f;
             }
             if (topVar(f) < x) {
-                return ite(x, coFactorFalse(uniqueTable[f].high, x), coFactorFalse(uniqueTable[f].low, x));
+                return ite(topVar(f), coFactorFalse(uniqueTable[f].high, x), coFactorFalse(uniqueTable[f].low, x));
             }
 
             return uniqueTable[f].low;
@@ -216,8 +210,8 @@ namespace ClassProject {
                 return;
             }
 
-            nodes_of_root.insert(root);
-
+            // nodes_of_root.insert(root);
+            nodes_of_root.insert(uniqueTable[root].topVar);
             if (isConstant(root)) {
                 return;
             }
@@ -247,5 +241,4 @@ namespace ClassProject {
         }
     };
 }
-
 #endif
