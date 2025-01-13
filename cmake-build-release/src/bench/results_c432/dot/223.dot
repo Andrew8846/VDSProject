@@ -1,0 +1,62 @@
+digraph BDD {
+center = true;
+{ rank = same; { node [style=invis]; "T" };
+ { node [shape=box,fontsize=12]; "0"; }
+  { node [shape=box,fontsize=12]; "1"; }
+}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "108" };"3";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "102" };"7";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "95" };"11";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "89" };"12";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "82" };"16";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "76" };"17";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "69" };"21";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "63" };"22";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "56" };"26";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "50" };"27";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "43" };"31";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "37" };"32";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "30" };"36";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "24" };"37";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "17" };"41";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "11" };"42";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "4" };"46";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "1" };"47";}
+edge [style = invis]; {"108" -> "102" -> "95" -> "89" -> "82" -> "76" -> "69" -> "63" -> "56" -> "50" -> "43" -> "37" -> "30" -> "24" -> "17" -> "11" -> "4" -> "1" -> "T"; }
+"3" -> "1" [style=solid,arrowsize=".75"];
+"3" -> "0" [style=dashed,arrowsize=".75"];
+"7" -> "1" [style=solid,arrowsize=".75"];
+"7" -> "0" [style=dashed,arrowsize=".75"];
+"11" -> "1" [style=solid,arrowsize=".75"];
+"11" -> "0" [style=dashed,arrowsize=".75"];
+"12" -> "1" [style=solid,arrowsize=".75"];
+"12" -> "0" [style=dashed,arrowsize=".75"];
+"16" -> "1" [style=solid,arrowsize=".75"];
+"16" -> "0" [style=dashed,arrowsize=".75"];
+"17" -> "1" [style=solid,arrowsize=".75"];
+"17" -> "0" [style=dashed,arrowsize=".75"];
+"21" -> "1" [style=solid,arrowsize=".75"];
+"21" -> "0" [style=dashed,arrowsize=".75"];
+"22" -> "1" [style=solid,arrowsize=".75"];
+"22" -> "0" [style=dashed,arrowsize=".75"];
+"26" -> "1" [style=solid,arrowsize=".75"];
+"26" -> "0" [style=dashed,arrowsize=".75"];
+"27" -> "1" [style=solid,arrowsize=".75"];
+"27" -> "0" [style=dashed,arrowsize=".75"];
+"31" -> "1" [style=solid,arrowsize=".75"];
+"31" -> "0" [style=dashed,arrowsize=".75"];
+"32" -> "1" [style=solid,arrowsize=".75"];
+"32" -> "0" [style=dashed,arrowsize=".75"];
+"36" -> "1" [style=solid,arrowsize=".75"];
+"36" -> "0" [style=dashed,arrowsize=".75"];
+"37" -> "1" [style=solid,arrowsize=".75"];
+"37" -> "0" [style=dashed,arrowsize=".75"];
+"41" -> "1" [style=solid,arrowsize=".75"];
+"41" -> "0" [style=dashed,arrowsize=".75"];
+"42" -> "1" [style=solid,arrowsize=".75"];
+"42" -> "0" [style=dashed,arrowsize=".75"];
+"46" -> "1" [style=solid,arrowsize=".75"];
+"46" -> "0" [style=dashed,arrowsize=".75"];
+"47" -> "1" [style=solid,arrowsize=".75"];
+"47" -> "0" [style=dashed,arrowsize=".75"];
+}

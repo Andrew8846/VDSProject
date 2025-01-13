@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "/home/andro/RPTU/vds2/VDSProject/gtest/googletest-build",
+		"source" : "gtest/googletest-src"
+	}
+}

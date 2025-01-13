@@ -1,0 +1,32 @@
+digraph BDD {
+center = true;
+{ rank = same; { node [style=invis]; "T" };
+ { node [shape=box,fontsize=12]; "0"; }
+  { node [shape=box,fontsize=12]; "1"; }
+}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "226" };"188";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "238" };"1383";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "232" };"1386";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "244" };"1399";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "264" };"4516";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "257" };"4519";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "270" };"4536";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "250" };"4794";}
+edge [style = invis]; {"226" -> "238" -> "232" -> "244" -> "264" -> "257" -> "270" -> "250" -> "T"; }
+"188" -> "1" [style=solid,arrowsize=".75"];
+"188" -> "0" [style=dashed,arrowsize=".75"];
+"1383" -> "1" [style=solid,arrowsize=".75"];
+"1383" -> "0" [style=dashed,arrowsize=".75"];
+"1386" -> "1" [style=solid,arrowsize=".75"];
+"1386" -> "0" [style=dashed,arrowsize=".75"];
+"1399" -> "1" [style=solid,arrowsize=".75"];
+"1399" -> "0" [style=dashed,arrowsize=".75"];
+"4516" -> "1" [style=solid,arrowsize=".75"];
+"4516" -> "0" [style=dashed,arrowsize=".75"];
+"4519" -> "1" [style=solid,arrowsize=".75"];
+"4519" -> "0" [style=dashed,arrowsize=".75"];
+"4536" -> "1" [style=solid,arrowsize=".75"];
+"4536" -> "0" [style=dashed,arrowsize=".75"];
+"4794" -> "1" [style=solid,arrowsize=".75"];
+"4794" -> "0" [style=dashed,arrowsize=".75"];
+}

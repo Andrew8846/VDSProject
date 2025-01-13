@@ -1,0 +1,65 @@
+digraph BDD {
+center = true;
+{ rank = same; { node [style=invis]; "T" };
+ { node [shape=box,fontsize=12]; "0"; }
+  { node [shape=box,fontsize=12]; "1"; }
+}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "13" };"4";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "20" };"6";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "1" };"7";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "50" };"45";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "58" };"93";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "68" };"96";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "77" };"154";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "226" };"188";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "116" };"949";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "107" };"960";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "97" };"972";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "87" };"981";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "238" };"1383";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "232" };"1386";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "244" };"1399";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "264" };"4516";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "257" };"4519";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "270" };"4536";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "250" };"4794";}
+edge [style = invis]; {"13" -> "20" -> "1" -> "50" -> "58" -> "68" -> "77" -> "226" -> "116" -> "107" -> "97" -> "87" -> "238" -> "232" -> "244" -> "264" -> "257" -> "270" -> "250" -> "T"; }
+"4" -> "1" [style=solid,arrowsize=".75"];
+"4" -> "0" [style=dashed,arrowsize=".75"];
+"6" -> "1" [style=solid,arrowsize=".75"];
+"6" -> "0" [style=dashed,arrowsize=".75"];
+"7" -> "1" [style=solid,arrowsize=".75"];
+"7" -> "0" [style=dashed,arrowsize=".75"];
+"45" -> "1" [style=solid,arrowsize=".75"];
+"45" -> "0" [style=dashed,arrowsize=".75"];
+"93" -> "1" [style=solid,arrowsize=".75"];
+"93" -> "0" [style=dashed,arrowsize=".75"];
+"96" -> "1" [style=solid,arrowsize=".75"];
+"96" -> "0" [style=dashed,arrowsize=".75"];
+"154" -> "1" [style=solid,arrowsize=".75"];
+"154" -> "0" [style=dashed,arrowsize=".75"];
+"188" -> "1" [style=solid,arrowsize=".75"];
+"188" -> "0" [style=dashed,arrowsize=".75"];
+"949" -> "1" [style=solid,arrowsize=".75"];
+"949" -> "0" [style=dashed,arrowsize=".75"];
+"960" -> "1" [style=solid,arrowsize=".75"];
+"960" -> "0" [style=dashed,arrowsize=".75"];
+"972" -> "1" [style=solid,arrowsize=".75"];
+"972" -> "0" [style=dashed,arrowsize=".75"];
+"981" -> "1" [style=solid,arrowsize=".75"];
+"981" -> "0" [style=dashed,arrowsize=".75"];
+"1383" -> "1" [style=solid,arrowsize=".75"];
+"1383" -> "0" [style=dashed,arrowsize=".75"];
+"1386" -> "1" [style=solid,arrowsize=".75"];
+"1386" -> "0" [style=dashed,arrowsize=".75"];
+"1399" -> "1" [style=solid,arrowsize=".75"];
+"1399" -> "0" [style=dashed,arrowsize=".75"];
+"4516" -> "1" [style=solid,arrowsize=".75"];
+"4516" -> "0" [style=dashed,arrowsize=".75"];
+"4519" -> "1" [style=solid,arrowsize=".75"];
+"4519" -> "0" [style=dashed,arrowsize=".75"];
+"4536" -> "1" [style=solid,arrowsize=".75"];
+"4536" -> "0" [style=dashed,arrowsize=".75"];
+"4794" -> "1" [style=solid,arrowsize=".75"];
+"4794" -> "0" [style=dashed,arrowsize=".75"];
+}

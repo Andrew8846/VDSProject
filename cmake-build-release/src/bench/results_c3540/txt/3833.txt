@@ -1,0 +1,10 @@
+Variable Node: 4794 Top Var Id: 4794 Top Var Name: 250 Low: 0 High: 1
+Variable Node: 4536 Top Var Id: 4536 Top Var Name: 270 Low: 0 High: 1
+Variable Node: 4519 Top Var Id: 4519 Top Var Name: 257 Low: 0 High: 1
+Variable Node: 4516 Top Var Id: 4516 Top Var Name: 264 Low: 0 High: 1
+Variable Node: 1399 Top Var Id: 1399 Top Var Name: 244 Low: 0 High: 1
+Variable Node: 1386 Top Var Id: 1386 Top Var Name: 232 Low: 0 High: 1
+Variable Node: 1383 Top Var Id: 1383 Top Var Name: 238 Low: 0 High: 1
+Variable Node: 188 Top Var Id: 188 Top Var Name: 226 Low: 0 High: 1
+Terminal Node: 1
+Terminal Node: 0

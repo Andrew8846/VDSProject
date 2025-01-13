@@ -1,0 +1,116 @@
+digraph BDD {
+center = true;
+{ rank = same; { node [style=invis]; "T" };
+ { node [shape=box,fontsize=12]; "0"; }
+  { node [shape=box,fontsize=12]; "1"; }
+}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "115" };"2";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "108" };"3";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "102" };"7";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "95" };"11";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "89" };"12";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "82" };"16";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "76" };"17";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "69" };"21";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "63" };"22";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "56" };"26";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "50" };"27";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "43" };"31";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "37" };"32";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "30" };"36";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "24" };"37";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "17" };"41";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "11" };"42";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "4" };"46";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "1" };"47";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "112" };"90";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "99" };"131";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "86" };"180";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "73" };"231";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "60" };"284";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "47" };"339";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "34" };"396";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "21" };"455";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "8" };"516";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "105" };"8762";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "92" };"12899";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "79" };"16926";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "66" };"20931";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "53" };"24994";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "40" };"29227";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "27" };"33830";}
+{ rank=same; { node [shape=plaintext,fontname="Times Italic",fontsize=12] "14" };"39191";}
+edge [style = invis]; {"115" -> "108" -> "102" -> "95" -> "89" -> "82" -> "76" -> "69" -> "63" -> "56" -> "50" -> "43" -> "37" -> "30" -> "24" -> "17" -> "11" -> "4" -> "1" -> "112" -> "99" -> "86" -> "73" -> "60" -> "47" -> "34" -> "21" -> "8" -> "105" -> "92" -> "79" -> "66" -> "53" -> "40" -> "27" -> "14" -> "T"; }
+"2" -> "1" [style=solid,arrowsize=".75"];
+"2" -> "0" [style=dashed,arrowsize=".75"];
+"3" -> "1" [style=solid,arrowsize=".75"];
+"3" -> "0" [style=dashed,arrowsize=".75"];
+"7" -> "1" [style=solid,arrowsize=".75"];
+"7" -> "0" [style=dashed,arrowsize=".75"];
+"11" -> "1" [style=solid,arrowsize=".75"];
+"11" -> "0" [style=dashed,arrowsize=".75"];
+"12" -> "1" [style=solid,arrowsize=".75"];
+"12" -> "0" [style=dashed,arrowsize=".75"];
+"16" -> "1" [style=solid,arrowsize=".75"];
+"16" -> "0" [style=dashed,arrowsize=".75"];
+"17" -> "1" [style=solid,arrowsize=".75"];
+"17" -> "0" [style=dashed,arrowsize=".75"];
+"21" -> "1" [style=solid,arrowsize=".75"];
+"21" -> "0" [style=dashed,arrowsize=".75"];
+"22" -> "1" [style=solid,arrowsize=".75"];
+"22" -> "0" [style=dashed,arrowsize=".75"];
+"26" -> "1" [style=solid,arrowsize=".75"];
+"26" -> "0" [style=dashed,arrowsize=".75"];
+"27" -> "1" [style=solid,arrowsize=".75"];
+"27" -> "0" [style=dashed,arrowsize=".75"];
+"31" -> "1" [style=solid,arrowsize=".75"];
+"31" -> "0" [style=dashed,arrowsize=".75"];
+"32" -> "1" [style=solid,arrowsize=".75"];
+"32" -> "0" [style=dashed,arrowsize=".75"];
+"36" -> "1" [style=solid,arrowsize=".75"];
+"36" -> "0" [style=dashed,arrowsize=".75"];
+"37" -> "1" [style=solid,arrowsize=".75"];
+"37" -> "0" [style=dashed,arrowsize=".75"];
+"41" -> "1" [style=solid,arrowsize=".75"];
+"41" -> "0" [style=dashed,arrowsize=".75"];
+"42" -> "1" [style=solid,arrowsize=".75"];
+"42" -> "0" [style=dashed,arrowsize=".75"];
+"46" -> "1" [style=solid,arrowsize=".75"];
+"46" -> "0" [style=dashed,arrowsize=".75"];
+"47" -> "1" [style=solid,arrowsize=".75"];
+"47" -> "0" [style=dashed,arrowsize=".75"];
+"90" -> "1" [style=solid,arrowsize=".75"];
+"90" -> "0" [style=dashed,arrowsize=".75"];
+"131" -> "1" [style=solid,arrowsize=".75"];
+"131" -> "0" [style=dashed,arrowsize=".75"];
+"180" -> "1" [style=solid,arrowsize=".75"];
+"180" -> "0" [style=dashed,arrowsize=".75"];
+"231" -> "1" [style=solid,arrowsize=".75"];
+"231" -> "0" [style=dashed,arrowsize=".75"];
+"284" -> "1" [style=solid,arrowsize=".75"];
+"284" -> "0" [style=dashed,arrowsize=".75"];
+"339" -> "1" [style=solid,arrowsize=".75"];
+"339" -> "0" [style=dashed,arrowsize=".75"];
+"396" -> "1" [style=solid,arrowsize=".75"];
+"396" -> "0" [style=dashed,arrowsize=".75"];
+"455" -> "1" [style=solid,arrowsize=".75"];
+"455" -> "0" [style=dashed,arrowsize=".75"];
+"516" -> "1" [style=solid,arrowsize=".75"];
+"516" -> "0" [style=dashed,arrowsize=".75"];
+"8762" -> "1" [style=solid,arrowsize=".75"];
+"8762" -> "0" [style=dashed,arrowsize=".75"];
+"12899" -> "1" [style=solid,arrowsize=".75"];
+"12899" -> "0" [style=dashed,arrowsize=".75"];
+"16926" -> "1" [style=solid,arrowsize=".75"];
+"16926" -> "0" [style=dashed,arrowsize=".75"];
+"20931" -> "1" [style=solid,arrowsize=".75"];
+"20931" -> "0" [style=dashed,arrowsize=".75"];
+"24994" -> "1" [style=solid,arrowsize=".75"];
+"24994" -> "0" [style=dashed,arrowsize=".75"];
+"29227" -> "1" [style=solid,arrowsize=".75"];
+"29227" -> "0" [style=dashed,arrowsize=".75"];
+"33830" -> "1" [style=solid,arrowsize=".75"];
+"33830" -> "0" [style=dashed,arrowsize=".75"];
+"39191" -> "1" [style=solid,arrowsize=".75"];
+"39191" -> "0" [style=dashed,arrowsize=".75"];
+}

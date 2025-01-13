@@ -1,0 +1,24 @@
+# ninja log v6
+3	1024	1736765082386785856	src/bench/CMakeFiles/Benchmark.dir/BenchmarkLib.cpp.o	4b51845cacce5084
+1	2046	1736765082384785859	src/CMakeFiles/Manager.dir/Manager.cpp.o	e70f872b81030190
+30	12915	1736765322851413259	src/libManager.a	145d38ad81985b9
+30	29640	1736765322851413259	src/bench/CMakeFiles/VDSProject_bench.dir/main_bench.cpp.o	c8ca6ca11abf350e
+29	30087	1736765322850413261	src/bench/CMakeFiles/Benchmark.dir/CircuitToBDD.cpp.o	d9828f71d77819d
+29	34463	1736765322850413261	src/bench/CMakeFiles/Benchmark.dir/BenchParser.cpp.o	140c508cfca1ad8b
+34463	34689	1736765357284359901	src/bench/libBenchmark.a	bf8e34e235e61536
+34689	34869	1736765357510359550	src/bench/VDSProject_bench	ef68de24d7e10610
+60	3680	1736773514559932515	src/CMakeFiles/Manager.dir/Manager.cpp.o	e70f872b81030190
+3680	8649	1736773518179926906	src/libManager.a	145d38ad81985b9
+61	13347	1736773514560932514	src/bench/CMakeFiles/VDSProject_bench.dir/main_bench.cpp.o	c8ca6ca11abf350e
+13348	13607	1736773527847911926	src/bench/VDSProject_bench	ef68de24d7e10610
+20	2302	1736774203002865811	/home/andro/RPTU/vds2/VDSProject/gtest/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	28c814094c69c4bb
+20	2838	1736774203003865809	src/CMakeFiles/Manager.dir/Manager.cpp.o	e70f872b81030190
+21	4522	1736774203003865809	src/test/CMakeFiles/VDSProject_test.dir/main_test.cpp.o	e86c5badb062737a
+2838	7596	1736774205820861444	src/libManager.a	145d38ad81985b9
+19	11434	1736774203001865812	/home/andro/RPTU/vds2/VDSProject/gtest/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	91db9d1245d6d21c
+11434	11547	1736774214416848125	lib/libgtest.a	e456d2052d59da6c
+11547	11613	1736774214529847950	lib/libgtest_main.a	957e7279e8f98941
+11613	11739	1736774214595847848	src/test/VDSProject_test	3491292cab243c05
+7	1904	1736774367997610139	src/CMakeFiles/Manager.dir/Manager.cpp.o	e70f872b81030190
+1904	2009	1736774369894607199	src/libManager.a	145d38ad81985b9
+2009	2129	1736774369999607037	src/test/VDSProject_test	3491292cab243c05
