@@ -6,8 +6,11 @@
 namespace ClassProject {
 
     Manager::Manager() {
-        uniqueTable.push_back({falseID, 0, 0, 0});
-        uniqueTable.push_back({trueID, 1, 1, 1});
+        uniqueTable[{0, 0, 0}] = falseID;
+        uniqueTable[{1, 1, 1}] = trueID;
+
+        uniqueTableReversed.push_back({falseID, 0, 0, 0});
+        uniqueTableReversed.push_back({trueID, 1, 1, 1});
 
         variableMap["False"] = 0;
         variableMap["True"] = 1;
@@ -21,8 +24,10 @@ namespace ClassProject {
         }
 
         BDD_ID id = uniqueTable.size();
+        BDDNode node{trueID, falseID, id};
         variableMap[label] = id;
-        uniqueTable.push_back({id, trueID, falseID, id});
+        uniqueTable[node] = id;
+        uniqueTableReversed.push_back({id, trueID, falseID, id});
         std::cout << "Created variable: " << label << ", ID: " << id << "\n";
         return id;
     }
@@ -40,14 +45,15 @@ namespace ClassProject {
     }
 
     bool Manager::isVariable(BDD_ID x) {
-        return !isConstant(x) && x < uniqueTable.size() && uniqueTable[x].topVar == x;
+        return !isConstant(x) && x < uniqueTableReversed.size() && uniqueTableReversed[x].topVar == x;
     }
 
     BDD_ID Manager::topVar(BDD_ID f) {
-        if (f >= uniqueTable.size()) {
+        if (f >= uniqueTableReversed.size()) {
             throw std::out_of_range("Invalid BDD_ID: " + std::to_string(f));
         }
-        return uniqueTable[f].topVar;
+
+        return uniqueTableReversed[f].topVar;
     }
 
     BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e) {
@@ -59,6 +65,11 @@ namespace ClassProject {
         }
         if (t == e) {
             return t;
+        }
+        // computed table added
+        auto itcomp = computedTable.find(ITETriple{i, t, e});
+        if (itcomp!=computedTable.end()) {
+            return itcomp->second;
         }
 
         size_t top = std::numeric_limits<size_t>::max();
@@ -73,14 +84,20 @@ namespace ClassProject {
             return rhigh;
         }
 
-        for (const auto &node : uniqueTable) {
-            if (node.high == rhigh && node.low == rlow && node.topVar == top) {
-                return node.id;
-            }
+        BDDNode node{rhigh, rlow, top};
+        ITETriple triple{i, t, e};
+
+        auto it = uniqueTable.find(node);
+        if (it != uniqueTable.end()) { // if result already exists in unique table
+            computedTable[triple] = it->second;
+            return it->second; // second is id
         }
 
         BDD_ID id = uniqueTable.size();
-        uniqueTable.push_back({id, rhigh, rlow, top});
+        uniqueTable[node] = id;
+        uniqueTableReversed.push_back({id, rhigh, rlow, top});
+        computedTable[triple] = id;
+
         return id;
     }
 
@@ -91,10 +108,11 @@ namespace ClassProject {
         if (topVar(f) > x) {
             return f;
         }
+
         if (topVar(f) < x) {
-            return ite(topVar(f), coFactorTrue(uniqueTable[f].high, x), coFactorTrue(uniqueTable[f].low, x));
+            return ite(topVar(f), coFactorTrue(uniqueTableReversed[f].high, x), coFactorTrue(uniqueTableReversed[f].low, x));
         }
-        return uniqueTable[f].high;
+        return uniqueTableReversed[f].high;
     }
 
     BDD_ID Manager::coFactorFalse(BDD_ID f, BDD_ID x) {
@@ -104,18 +122,19 @@ namespace ClassProject {
         if (topVar(f) > x) {
             return f;
         }
+
         if (topVar(f) < x) {
-            return ite(topVar(f), coFactorFalse(uniqueTable[f].high, x), coFactorFalse(uniqueTable[f].low, x));
+            return ite(topVar(f), coFactorFalse(uniqueTableReversed[f].high, x), coFactorFalse(uniqueTableReversed[f].low, x));
         }
-        return uniqueTable[f].low;
+        return uniqueTableReversed[f].low;
     }
 
     BDD_ID Manager::coFactorTrue(BDD_ID f) {
-        return uniqueTable[f].high;
+        return uniqueTableReversed[f].high;
     }
 
     BDD_ID Manager::coFactorFalse(BDD_ID f) {
-        return uniqueTable[f].low;
+        return uniqueTableReversed[f].low;
     }
 
     BDD_ID Manager::neg(BDD_ID a) {
@@ -159,12 +178,13 @@ namespace ClassProject {
         if (nodes_of_root.find(root) != nodes_of_root.end()) {
             return;
         }
-        nodes_of_root.insert(uniqueTable[root].topVar);
+
+        nodes_of_root.insert(uniqueTableReversed[root].topVar);
         if (isConstant(root)) {
             return;
         }
-        findNodes(uniqueTable[root].high, nodes_of_root);
-        findNodes(uniqueTable[root].low, nodes_of_root);
+        findNodes(uniqueTableReversed[root].high, nodes_of_root);
+        findNodes(uniqueTableReversed[root].low, nodes_of_root);
     }
 
     void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root) {
@@ -173,7 +193,7 @@ namespace ClassProject {
 
         for (const auto &node : nodes_of_root) {
             if (isVariable(node)) {
-                vars_of_root.insert(uniqueTable[node].topVar);
+                vars_of_root.insert(uniqueTableReversed[node].topVar);
             }
         }
     }

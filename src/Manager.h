@@ -23,16 +23,56 @@ namespace ClassProject {
     using std::set;
 
     struct BDDNode {
+        size_t high;
+        size_t low;
+        size_t topVar;
+
+        bool operator ==(const BDDNode &other) const {
+            return high == other.high && low == other.low && topVar == other.topVar;
+        }
+    };
+
+    struct BDDNodeWithId {
         size_t id;
         size_t high;
         size_t low;
         size_t topVar;
     };
 
+    struct ITETriple {
+        size_t i;
+        size_t t;
+        size_t e;
+
+        bool operator ==(const ITETriple &other) const {
+            return i == other.i && t == other.t && e == other.e;
+        }
+    };
+
+    struct BDDNodeHash {
+        size_t operator()(const BDDNode& node) const {
+            size_t hash = std::hash<size_t>()(node.high);
+            hash ^= std::hash<size_t>()(node.low) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= std::hash<size_t>()(node.topVar) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            return hash;
+        }
+    };
+
+    struct ITEHash {
+        size_t operator()(const ITETriple& node) const {
+            size_t hash = std::hash<size_t>()(node.i);
+            hash ^= std::hash<size_t>()(node.t) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            hash ^= std::hash<size_t>()(node.e) + 0x9e3779b9 + (hash << 6) + (hash >> 2);
+            return hash;
+        }
+    };
+
     class Manager : public ManagerInterface {
     private:
-        vector<BDDNode> uniqueTable;
+        unordered_map<BDDNode, size_t, BDDNodeHash> uniqueTable; // double indexed list map
+        vector<BDDNodeWithId> uniqueTableReversed;
         unordered_map<string, size_t> variableMap;
+        unordered_map<ITETriple, size_t, ITEHash> computedTable;
         const BDD_ID falseID = 0;
         const BDD_ID trueID = 1;
 

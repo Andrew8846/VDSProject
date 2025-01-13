@@ -10,7 +10,7 @@ using namespace ClassProject;
 class ManagerTests : public testing::Test {
 protected:
     ClassProject::Manager manager;
-    ClassProject::BDD_ID a_id, b_id, c_id, d_id, a_or_b_id, c_and_d_id, f1_id;
+    ClassProject::BDD_ID a_id, b_id, c_id, d_id, a_or_b_id, c_and_d_id, f1_id, androtestID;
 
     void SetUp() override {
         a_id = manager.createVar("a");
@@ -34,6 +34,9 @@ TEST_F(ManagerTests, ccdsdfa) {
     EXPECT_EQ(manager.coFactorTrue(f1_id, b_id), c_and_d_id);
     EXPECT_EQ(manager.coFactorTrue(f1_id, c_id), manager.and2(d_id, a_or_b_id));
     EXPECT_EQ(manager.coFactorTrue(f1_id, d_id), manager.and2(c_id, a_or_b_id));
+
+    std::cout << "es testic damtavrdaaa" << std::endl;
+
 }
 
 
@@ -193,6 +196,24 @@ TEST_F(ManagerTests, CofactorsOneInputTest) {
     EXPECT_EQ(manager.coFactorFalse(or_ab), b_id);
 }
 
+
+TEST_F(ManagerTests, random) {
+    // auto result1 = manager.ite(a_id, b_id, c_id);
+    // auto result2 = manager.ite(a_id, b_id, c_id);
+    // EXPECT_EQ(result1, result2);
+
+    // Case: i == False
+    // EXPECT_EQ(manager.ite(manager.False(), a_id, b_id), b_id);
+    //
+    // // Case: t == e
+    // EXPECT_EQ(manager.ite(a_id, b_id, b_id), b_id);
+    //
+    // // General case
+    // auto result = manager.ite(a_id, b_id, c_id);
+    // EXPECT_NE(result, a_id);
+    // EXPECT_NE(result, b_id);
+    // EXPECT_NE(result, c_id);
+}
 int main(int argc, char* argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
