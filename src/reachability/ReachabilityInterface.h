@@ -10,12 +10,12 @@
 
 namespace ClassProject {
     class ReachabilityInterface : public Manager {
-    protected:
-    	unsigned int stateSize;
-    	unsigned int inputSize;
+    //protected:
+    //	unsigned int stateSize;
+    //	unsigned int inputSize;
     public:
 
-        ReachabilityInterface() = delete; // todo question: why do we have delete here?
+        //ReachabilityInterface() = delete; // todo question: why do we have delete here?
         virtual ~ReachabilityInterface() = default;
 
         /**
@@ -29,7 +29,7 @@ namespace ClassProject {
          * @param inputSize number of boolean input bits, defaults to zero
          * @throws std::runtime_error if stateSize is zero
          */
-        explicit ReachabilityInterface(unsigned int stateSize, unsigned int inputSize) {};
+       // explicit ReachabilityInterface(unsigned int stateSize, unsigned int inputSize) {};
 
         /**
          * Returns a vector containing all state bits of the state machine.
