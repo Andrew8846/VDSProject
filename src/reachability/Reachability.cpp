@@ -42,7 +42,7 @@ using namespace ClassProject;
         }
 
         void Reachability::setInitState(const std::vector<bool> &stateVector)  {
-           if (stateVector.size() != initState.size()) {
+           if (stateVector.size() != stateVars.size()) {
              throw std::invalid_argument("stateSize must be equal to stateVector size");
            }
 
@@ -69,8 +69,20 @@ using namespace ClassProject;
 
         bool Reachability::isReachable(const std::vector<bool> &stateVector)  {
             if (stateVector.size() != stateVars.size()) {
-              throw std::invalid_argument("Reachability::isReachable()");
+              throw std::runtime_error("size does not match with number of state bits");
             }
+   
+            auto CrIt = currentReachableSet;
+            auto Crr = CrIt;
+
+
+            do {
+              Crr = CrIt;
+              auto imageNext = computeImageNextStates(Crr);
+              auto imageCurrent = computeImageCurrentStates(imageNext);
+              CrIt = or2(Crr, imageCurrent);
+            }
+            while (Crr != CrIt);
 
             // create bdd for input stateVector
             BDD_ID stateBDD = True();
@@ -78,12 +90,17 @@ using namespace ClassProject;
               stateBDD = and2(stateBDD, stateVector[i] ? stateVars[i] : neg(stateVars[i])); // this creates bdd for stateVector
             }
 
-            BDD_ID intersection = and2(currentReachableSet, stateBDD);
+            BDD_ID intersection = and2(Crr, stateBDD);
 
             return intersection == stateBDD;
         }
 
         int Reachability::stateDistance(const std::vector<bool> &stateVector) {
+           if (stateVars.size() != stateVector.size())
+           {
+             throw std::runtime_error("size does not match with number of state bits");
+           }
+
           if (!isReachable(stateVector)) {
             return -1;
           }
@@ -104,7 +121,7 @@ using namespace ClassProject;
             BDD_ID nextStateImage = computeImageNextStates(reachableSet);
             BDD_ID currentStateImage = computeImageCurrentStates(nextStateImage);
 
-            reachableSet = and2(reachableSet, currentStateImage);
+            reachableSet = or2(reachableSet, currentStateImage);
             distance++;
           }
 
